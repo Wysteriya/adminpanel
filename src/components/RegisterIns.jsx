@@ -88,7 +88,7 @@ const RegisterIns = () => {
     return (
         <div class="w-full">
             <h2 class="text-center text-blue-400 font-bold text-2xl uppercase mb-10">Register Insurance</h2>
-            <div class="bg-white p-10 rounded-lg shadow md:w-3/4 mx-auto lg:w-1/2">
+            <div class="bg-pink-100 p-10 rounded-lg shadow md:w-3/4 mx-auto lg:w-1/2">
                 <form onSubmit={handleSubmit}>
                     <div class="mb-5">
                         <label for="privateKey" class="block mb-2 font-bold text-gray-600">Private Key</label>
@@ -140,7 +140,7 @@ const RegisterIns = () => {
                 </form>
             </div>
             <div className="w-1/2 m-auto p-2 h-52 bg-orange-200">
-                <h2>Response</h2>{response}</div>
+                <h2>RESPONSE</h2>{response}</div>
         </div>)
 }
 
