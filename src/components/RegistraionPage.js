@@ -85,19 +85,7 @@ const RegForm = () => {
   };
 
   return (
-    <div>
       <form className="form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="privateKey">Private Key</label>
-          <input
-            type="text"
-            name="privateKey"
-            id="privateKey"
-            value={privateKey}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
 
         <div className="form-group">
           <label htmlFor="publicKey">Public Key</label>
@@ -111,6 +99,28 @@ const RegForm = () => {
           />
         </div>
 
+        <div className="form-group">
+          <label htmlFor="privateKey">Private Key</label>
+          <input
+            type="text"
+            name="privateKey"
+            id="privateKey"
+            value={privateKey}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="publicKey">Public Key</label>
+          <input
+            type="text"
+            name="publicKey"
+            id="publicKey"
+            value={publickey}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="insurance_name">Insurance Name</label>
           <input
@@ -214,10 +224,7 @@ const RegForm = () => {
           Submit
         </button>
       </form>
-      <div className='response'>
-          {response}
-      </div>
-    </div>
+
   )
 }
 export default RegForm;
