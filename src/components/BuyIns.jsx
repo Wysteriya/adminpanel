@@ -24,31 +24,31 @@ const BuyIns = () => {
         }
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const baseUrl = "http://34.125.255.98:9080/baby_chain/private/buy_ins/"
+        const baseUrl = "http://localhost:9080/baby_chain/private/buy_ins"
         // Do something with the form data here
         const postData = {
-            private_key: privateKey,
             public_key: publickey,
+            private_key: privateKey,
             policy_ref_id : policyRefId
         }
-        axios.post(baseUrl, postData).then((response) => {
-            console.log(response.status)
-            console.log(response.data);
-            setResponse(response)
+            console.log(postData);
+        await axios.post(baseUrl, postData).then((response) => {
+            console.log(response.data)
+            setResponse(response.data)
         })
     };
 
 
     return (
         <div class="w-full">
-            <h2 class="text-center text-blue-400 font-bold text-2xl uppercase mb-10">Register Insurance</h2>
+            <h2 class="text-center text-blue-400 font-bold text-2xl uppercase mb-10">Buy Insurance</h2>
             <div class="bg-white p-10 rounded-lg shadow md:w-3/4 mx-auto lg:w-1/2">
                 <form onSubmit={handleSubmit}>
                     <div class="mb-5">
                         <label for="privateKey" class="block mb-2 font-bold text-gray-600">Private Key</label>
-                        <input type="text" id="name" name="privateKey" class="border border-gray-300 shadow p-3 w-full rounded mb-"  />
+                        <input type="text" id="name" name="privateKey" class="border border-gray-300 shadow p-3 w-full rounded mb-" onChange={handleInputChange} />
                     </div>
 
                     <div class="mb-5">
@@ -64,7 +64,8 @@ const BuyIns = () => {
                 </form>
             </div>
             <div className="w-1/2 m-auto p-2 h-52 bg-orange-200">
-                <h2>Response</h2>{response}</div>
+                <h2>Response</h2>
+                <div><pre>{JSON.stringify(response)}</pre></div></div>
         </div>)
 }
 

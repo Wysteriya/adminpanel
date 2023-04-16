@@ -17,7 +17,6 @@ const RegisterIns = () => {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        console.log(name,value)
         switch (name) {
             case 'privateKey':
                 setPrivateKey(value);
@@ -59,7 +58,7 @@ const RegisterIns = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const baseUrl = "http://34.125.255.98:9090/baby_chain/public/register_ins/"
+        const baseUrl = "http://localhost:9090/baby_chain/public/register_ins"
         // Do something with the form data here
         const postData = {
             private_key: privateKey,
@@ -76,11 +75,9 @@ const RegisterIns = () => {
                 coverage_value: coverageValue
             }
         }
-        console.log("here",postData)
         await axios.post(baseUrl, postData).then((response) => {
-            console.log(response.status)
-            console.log(response.data);
-            setResponse(response)
+            console.log(response.error)
+            setResponse(response.data)
         })
     };
 
@@ -92,7 +89,7 @@ const RegisterIns = () => {
                 <form onSubmit={handleSubmit}>
                     <div class="mb-5">
                         <label for="privateKey" class="block mb-2 font-bold text-gray-600">Private Key</label>
-                        <input type="text" id="name" name="privateKey" class="border border-gray-300 shadow p-3 w-full rounded mb-"  />
+                        <input type="text" id="name" name="privateKey" class="border border-gray-300 shadow p-3 w-full rounded mb-" onChange={handleInputChange} />
                     </div>
 
                     <div class="mb-5">
@@ -140,7 +137,8 @@ const RegisterIns = () => {
                 </form>
             </div>
             <div className="w-1/2 m-auto p-2 h-52 bg-orange-200">
-                <h2>RESPONSE</h2>{response}</div>
+                <h2>RESPONSE</h2>
+                <div><pre>{JSON.stringify(response)}</pre></div></div>
         </div>)
 }
 
