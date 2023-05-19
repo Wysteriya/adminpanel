@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Navbar } from "./utils/Navbar";
 
 const BuyIns = () => {
   const [privateKey, setPrivateKey] = useState("");
@@ -41,19 +42,21 @@ const BuyIns = () => {
   };
 
   return (
-    <div class="w-full font-poppins">
-      <div className="text-[1.5rem] font-semibold cursor-pointer fixed tracking-wide top-[0.75rem] left-[2rem]">
-        INSUREGO
-        <div className="text-gray-500 text-sm font-thin">Team wysteria</div>
-      </div>
-      <h2 class="text-center text-gray-900 font-bold text-2xl uppercase mb-10 mt-10">
+    <>
+    <Navbar/>
+    <div class="w-full font-poppins grid justify-around p-10 items-center flex-wrap grid-cols-2">
+      
+      <h2 class="text-center text-gray-900 font-bold text-2xl uppercase mb-10 fixed right-[2rem] top-[0.75rem]">
         Buy Insurance
       </h2>
-      <div class="w-full h-full px-36">
-        <form class="bg-white shadow-md rounded px-10 pt-6 pb-8 mb-4">
+      <div class="h-full px-36 py-36 col-span-1 min-w-full">
+        <form
+          class=" bg-blue-500 shadow-md rounded px-10 pt-6 pb-8 mb-4"
+          onSubmit={handleSubmit}
+        >
           <div class="mb-8">
             <label
-              class="block text-gray-700 text-sm font-bold mb-2"
+              class="block text-white text-sm font-bold mb-2"
               for="username"
             >
               Public key
@@ -63,11 +66,12 @@ const BuyIns = () => {
               id="public_key"
               type="text"
               placeholder="public key"
+              onChange={handleInputChange}
             />
           </div>
           <div class="mb-6">
             <label
-              class="block text-gray-700 text-sm font-bold mb-2"
+              class="block text-white text-sm font-bold mb-2"
               for="password"
             >
               Private key
@@ -77,11 +81,12 @@ const BuyIns = () => {
               id="private_key"
               type="private_key"
               placeholder="private key"
+              onChange={handleInputChange}
             />
           </div>
           <div class="mb-6">
             <label
-              class="block text-gray-700 text-sm font-bold mb-2"
+              class="block text-white text-sm font-bold mb-2"
               for="password"
             >
               Policy Ref Id
@@ -91,25 +96,27 @@ const BuyIns = () => {
               id="policy_refId"
               type="text"
               placeholder="Policy ref ID"
+              onChange={handleInputChange}
             />
           </div>
           <div class="flex">
             <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
+              class="bg-blue-500 border-2 border-blue-600 hover:bg-white hover:text-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-all ease-in-out"
+              type="submit"
             >
               Submit
             </button>
           </div>
         </form>
       </div>
-      <div className="w-1/2 m-auto p-2 h-52 bg-orange-200">
+      <div className="h-[60vh] p-2  bg-orange-200 mx-10 rounded-lg col-span-1">
         <h2>Response</h2>
         <div>
           <pre>{JSON.stringify(response)}</pre>
         </div>
       </div>
     </div>
+    </>
   );
 };
 

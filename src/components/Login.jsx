@@ -1,11 +1,11 @@
+import { Navbar } from "./utils/Navbar"
+
 const Login = () => {
   return (
-    <div class="bg-white min-h-screen flex items-center justify-center px-64 bg-[url('./wave.svg)] font-poppins">
-      <div className="text-[1.5rem] font-semibold cursor-pointer fixed tracking-wide top-[0.75rem] left-[2rem]">
-        INSUREGO
-        <div className="text-gray-500 text-sm font-thin">Team wysteria</div>
-      </div>
-      <div className="w-full bg-blue-500 p-10 flex rounded-lg shadow-xl">
+    <>
+    <Navbar/>
+    <div class="bg-white min-h-screen flex items-center justify-center font-poppins p-4">
+      <div className=" w-full md:w-4/5 bg-blue-500 p-10 flex rounded-lg shadow-xl ">
         <div class="w-full h-full">
           <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div class="mb-8">
@@ -49,6 +49,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

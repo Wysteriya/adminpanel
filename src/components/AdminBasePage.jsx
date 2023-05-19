@@ -1,26 +1,44 @@
-const AdminBasePage = () => {
-    return (
-        <div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" styles="background-image:url('https://images.unsplash.com/photo-1499123785106-343e69e68db1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1748&q=80')">
-            <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
-                <div class="text-white">
-                    <div class="mb-8 flex flex-col items-center">
-                        <img src="https://iili.io/Hvw2XV4.pnghttps://www.logo.wine/a/logo/Instagram/Instagram-Glyph-Color-Logo.wine.svg" width="150" alt="" srcset="" />
-                        <h1 class="mb-2 text-2xl">Insurego</h1>
-                        <span class="text-gray-300">Select the operation</span>
-                    </div>
-                    <form action="#">
-                        <div class="mb-4 text-lg">
-                            <a href="/register_ins" class="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"  >Register Insurance </a>
-                        </div>
+import { Navbar } from "./utils/Navbar";
 
-                        <div class="mb-4 text-lg">
-                            <a href="/buy_ins" class="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"  >Buy Insurance </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
+const AdminBasePage = () => {
+  return (
+    <>
+    <Navbar/>
+    <div className="w-full h-screen bg-white flex flex-wrap justify-center items-center font-poppins">
+      
+      <div className="h-4/5 w-4/5 grid grid-cols-1 md:grid-cols-2">
+        <div className="h-full w-full col-span-1 grid items-center">
+          <img
+            src="https://iili.io/Hvw2XV4.pnghttps://www.logo.wine/a/logo/Instagram/Instagram-Glyph-Color-Logo.wine.svg "
+            width={400}
+            className="m-auto"
+          ></img>
         </div>
-    )
-}
+        <div className="h-full w-full bg-blue-300 col-span-1 flex justify-center items-center p-4">
+          <div className="flex flex-col items-center justify-center bg-blue-500 gap-4 w-full h-4/5 text-white rounded-lg">
+          <div class="text-lg">
+            <a
+              href="/register_ins"
+              class="rounded-lg border-none bg-blue-400  px-6 py-2 text-center text-inherit placeholder-slate-200  outline-none backdrop-blur-md"
+            >
+              Register Insurance{" "}
+            </a>
+          </div>
+
+          <div class="text-lg">
+            <a
+              href="/buy_ins"
+              class="rounded-lg border-none bg-blue-400  px-6 py-2 text-center text-inherit placeholder-slate-200  outline-none backdrop-blur-md"
+            >
+              Buy Insurance{" "}
+            </a>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </>
+  );
+};
 
 export default AdminBasePage;
