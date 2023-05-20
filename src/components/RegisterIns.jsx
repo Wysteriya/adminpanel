@@ -1,9 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Navbar } from "./utils/Navbar";
-
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useCookies } from "react-cookie";
 const RegisterIns = () => {
 
+  const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const {private_key,public_key}=cookies;
+  console.log(cookies);
+  const notifySuccess = (message) => {
+    return toast.success(`${message}`);
+  };
+  const notifyError = (message) => {
+    return toast.error(`${message}`);
+  };
   const initial={
     "insurance_name":"",
     "company_name":"",
@@ -18,14 +29,25 @@ const RegisterIns = () => {
   const [data,setData]=useState(initial)
 
   const [error,setError]=useState(initial)
+  const [policyId,setPolicyId]=useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const baseUrl = "http://34.125.194.30:9090/baby_chain/public/register_ins";
+    const baseUrl = "http://34.16.148.55:9090/baby_chain/public/register_ins";
     // Do something with the form data here
-    
-    await axios.post(baseUrl, data).then((response) => {
-      console.log(response.error);
-      // setResponse(response.data);
+    const postData={
+      "public_key":`${public_key}`,
+      "private_key":`${private_key}`,
+      "data":{
+        ...data
+      }
+    }
+    await axios.post(baseUrl, postData).then((response) => {
+      console.log(response.policy_ref_id);
+      notifySuccess("successfully fetched policy id")
+      setPolicyId(response.data.policy_ref_id);
+      
+    }).catch((error)=>{
+      notifyError(error.response.data.error)
     });
   }
 
@@ -38,6 +60,19 @@ const RegisterIns = () => {
   return (
     <>
     <Navbar/>
+    <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Slide}
+      />
     <div class="w-full font-poppins grid justify-around p-4 md:p-10 items-center flex-wrap grid-cols-1 bg-blue-500">
       
       <h2 class="text-center text-gray-900 font-bold text-2xl uppercase mb-10 fixed right-[2rem] top-[0.75rem]">
@@ -178,6 +213,9 @@ const RegisterIns = () => {
             </button>
           </div>
         </form>
+        <div className="py-4 px-6 bg-white text-gray-850 rounded-lg"  value={policyId} onChange={""} onClick={""}>
+          {policyId}
+        </div>
       </div>
     </div>
     </>

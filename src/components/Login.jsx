@@ -1,24 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navbar } from "./utils/Navbar";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
-import { redirect } from "react-router-dom";
+import {useCookies} from 'react-cookie'
 const Login = () => {
   const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(['user']);
+  const {private_key,public_key}=cookies;
   const notifySuccess = (message) => {
     return toast.success(`${message}`);
   };
   const notifyError = (message) => {
     return toast.error(`${message}`);
   };
+  const handelsetCookie=()=>{
+    console.log("cookies")
+  }
   const [data, setData] = useState({
-    private_key: "",
-    public_key: "",
+    user_name: "",
+    password: "",
   });
+  const handle = () => {
+    setCookie('private_key', "3e96a3f3437253b213b64e8161180c473df1c19eae370c7dc7f4490ccc5317e882826aad14ea22a3d0dbfa56735ec7f5c6fba954e49e2d5872ac0318cba51e16", { path: '/' });
+    setCookie('public_key', "82826aad14ea22a3d0dbfa56735ec7f5c6fba954e49e2d5872ac0318cba51e16", { path: '/' });
+ };
+ useEffect(()=>{
+   handle();
+ },[])
 
-  const initial = { public_key: "", public_key: "", error: true };
+  const initial = { user_name: "", password: "", error: true };
   const [error, setError] = useState(initial);
 
   const [response, setResponse] = useState("");
@@ -33,16 +45,16 @@ const Login = () => {
   };
 
   const validateform = () => {
-    if (data.public_key == "" && data.private_key == "") {
+    if (data.user_name == "" && data.password == "") {
       return {
-        public_key: "invalid public key",
-        private_key: "invalid private key",
+        user_name: "user field is empty",
+        private_key: "password field is empty",
         error: true,
       };
-    } else if (data.private_key == "") {
-      return { private_key: "invalid private key", error: true };
-    } else if (data.public_key == "" && data.private_key == "") {
-      return { public_key: "invalid public key", error: true };
+    } else if (data.user_name == "") {
+      return { user_name: "user field is empty", error: true };
+    } else if (data.password == "" || data.password !== "password") {
+      return { password: "invalid password", error: true };
     }
     return { error: false };
   };
@@ -58,19 +70,23 @@ const Login = () => {
     }
     const baseUrl = "http://34.125.194.30:9090/baby_chain/public/login";
     await axios
-      .post(baseUrl, data)
+      .post(baseUrl, {"public_key":public_key,"private_key":private_key})
       .then(async (response) => {
         console.log("response", response);
         notifySuccess(response.data.message);
+        
         await sleep(3000).then(() => {
-          navigate("/");
+          navigate("/register_ins");
         });
       })
       .catch((error) => {
         console.log(error.response.data.error);
         notifyError(error.response.data.error);
       });
+      
     console.log(data);
+    // handle();
+
   };
 
   return (
@@ -101,34 +117,34 @@ const Login = () => {
                   class="block text-gray-700 text-sm font-bold mb-2"
                   for="username"
                 >
-                  Public key
+                  User name
                 </label>
                 <input
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="public_key"
+                  id="user_name"
                   type="text"
-                  placeholder="public key"
-                  value={data.public_key}
+                  placeholder="Enter username ..."
+                  value={data.user_name}
                   onChange={handleChange}
                 />
-                <div className="text-sm text-red-500">{error.public_key}</div>
+                <div className="text-sm text-red-500">{error.user_name}</div>
               </div>
               <div class="mb-8">
                 <label
                   class="block text-gray-700 text-sm font-bold mb-2"
                   for="password"
                 >
-                  Private key
+                  Password
                 </label>
                 <input
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                  id="private_key"
-                  type="private_key"
-                  placeholder="private key"
-                  value={data.private_key}
+                  id="password"
+                  type="password"
+                  placeholder="password"
+                  value={data.password}
                   onChange={handleChange}
                 />
-                <div className="text-sm text-red-500">{error.private_key}</div>
+                <div className="text-sm text-red-500">{error.password}</div>
               </div>
 
               <div class="flex">

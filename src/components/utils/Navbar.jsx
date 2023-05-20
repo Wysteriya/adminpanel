@@ -32,7 +32,10 @@ export const Navbar = () => {
           whileHover={{y:-5,rotate:-2}}>
             <a href="/consultency">Consultency</a>
           </motion.li>
-      
+          <motion.li className="rounded-full py-2 px-4 border-2 hover:border-blue-200 hover:bg-blue-600 hover:text-white transition-bg ease-in-out"
+          whileHover={{y:-5,rotate:-2}}>
+            <a href="/list_policy">List Insurance</a>
+          </motion.li>
           
         </ul>
       </nav>
