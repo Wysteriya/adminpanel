@@ -11,7 +11,10 @@ import BuyIns from './components/BuyIns';
 import Login from './components/Login';
 import HomePage from "./components/Homepage";
 import AdminBasePage from "./components/AdminBasePage";
-
+import { Claim } from "./components/utils/Claim";
+import { Consultency } from "./components/Consultency";
+import { Listpolicies } from "./components/Listpolicies";
+import { InsuranceDetails } from "./components/InsuranceDetails";
 function App() {
   return (
     <Router >
@@ -21,6 +24,10 @@ function App() {
                  <Route exact path='/register_ins' element={< RegisterIns/>}></Route>
                  <Route exact path='/login' element={<Login/>}></Route>
                  <Route exact path='/admin_base' element={<AdminBasePage/>} ></Route>
+                 <Route exact path='/claim' element={<Claim/>} ></Route>
+                 <Route exact path='/consultency' element={<Consultency/>} ></Route>
+                 <Route exact path='/list_policy' element={<Listpolicies/>} ></Route>
+                 <Route exact path='/details/:id' element={<InsuranceDetails/>} ></Route>
         </Routes>
     </Router>
     
