@@ -3,21 +3,20 @@ import axios from "axios";
 import { Navbar } from "./utils/Navbar";
 import { ToastContainer, toast,Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {useCookies} from 'react-cookie'
 const BuyIns = () => {
-
   const notifySuccess = (message) => {
     return toast.success(`${message}`);
   };
   const notifyError = (message) => {
     return toast.error(`${message}`);
   };
-
-
   const [data,setData]=useState({
     "private_key":"",
     "public_key":"",
     "policy_ref_id":"",
   })
+ 
   const handleInputChange = (event) => {
      setData((prev)=>{
        return {...prev,[event.target.id]:event.target.value}
