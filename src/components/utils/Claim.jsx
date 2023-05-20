@@ -57,7 +57,7 @@ export const Claim = () => {
       setError(validate);
       return;
     }
-    const baseUrl = "http://34.125.194.30:9080/baby_chain/private/claim_ins/";
+    const baseUrl = "http://34.125.194.30:9080/baby_chain/private/claim_ins";
     await axios
       .post(baseUrl, data)
       .then((response) => {
@@ -74,6 +74,19 @@ export const Claim = () => {
   return (
     <>
       <Navbar />
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Slide}
+      />
       <div class="bg-white min-h-screen flex items-center justify-center font-poppins p-4">
         <div className=" w-full md:w-4/5 bg-blue-500 p-10 flex rounded-lg shadow-xl ">
           <div class="w-full h-full">
