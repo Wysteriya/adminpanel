@@ -14,11 +14,7 @@ export const Navbar = () => {
           whileHover={{y:-5,rotate:2}} >
             <a href="/login">Admin login</a>
           </motion.li>
-          <motion.li className="rounded-full py-2 px-4 border-2 hover:border-blue-200 hover:bg-blue-600 hover:text-white transition-bg ease-in-out"
-          whileHover={{y:-5,rotate:3}}
-          >
-            <a href="/buy_ins">Buy Insurance</a>
-          </motion.li>
+          
           <motion.li className="rounded-full py-2 px-4 border-2 hover:border-blue-200 hover:bg-blue-600 hover:text-white transition-bg ease-in-out"
           whileHover={{y:-5,rotate:-2}}>
                         <a href="/register_ins">Register Insurance</a>

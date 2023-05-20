@@ -32,7 +32,7 @@ const RegisterIns = () => {
   const [policyId,setPolicyId]=useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const baseUrl = "http://34.16.148.55:9090/baby_chain/public/register_ins";
+    const baseUrl = "http://34.125.194.30:9090/baby_chain/public/register_ins";
     // Do something with the form data here
     const postData={
       "public_key":`${public_key}`,
@@ -74,6 +74,7 @@ const RegisterIns = () => {
         transition={Slide}
       />
     <div class="w-full font-poppins grid justify-around p-4 md:p-10 items-center flex-wrap grid-cols-1 bg-blue-500">
+    <div className="text-2xl text-white">Register insurance</div>
       
       <h2 class="text-center text-gray-900 font-bold text-2xl uppercase mb-10 fixed right-[2rem] top-[0.75rem]">
         Buy Insurance
