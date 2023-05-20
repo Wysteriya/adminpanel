@@ -11,6 +11,8 @@ import BuyIns from './components/BuyIns';
 import Login from './components/Login';
 import HomePage from "./components/Homepage";
 import AdminBasePage from "./components/AdminBasePage";
+import { Claim } from "./components/utils/Claim";
+import { Consultency } from "./components/Consultency";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
                  <Route exact path='/register_ins' element={< RegisterIns/>}></Route>
                  <Route exact path='/login' element={<Login/>}></Route>
                  <Route exact path='/admin_base' element={<AdminBasePage/>} ></Route>
+                 <Route exact path='/claim' element={<Claim/>} ></Route>
+                 <Route exact path='/consultency' element={<Consultency/>} ></Route>
         </Routes>
     </Router>
     

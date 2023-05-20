@@ -1,12 +1,10 @@
-import { useState } from "react";
-import { Navbar } from "./utils/Navbar";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast, Slide } from "react-toastify";
-import axios from "axios";
+import React,{useState} from "react";
+import { Navbar } from "./Navbar";
+import { ToastContainer, toast,Slide } from "react-toastify";
+import axios from 'axios'
 import "react-toastify/dist/ReactToastify.css";
-import { redirect } from "react-router-dom";
-const Login = () => {
-  const navigate = useNavigate();
+import {redirect} from 'react-router-dom'
+export const Claim = () => {
   const notifySuccess = (message) => {
     return toast.success(`${message}`);
   };
@@ -16,12 +14,14 @@ const Login = () => {
   const [data, setData] = useState({
     private_key: "",
     public_key: "",
+    policy_ref_id:"",
+    claim_amount:"",
+    claim_date:"20/05/2023",
   });
 
   const initial = { public_key: "", public_key: "", error: true };
   const [error, setError] = useState(initial);
 
-  const [response, setResponse] = useState("");
 
   const handleChange = (e) => {
     setError((prev) => {
@@ -33,22 +33,23 @@ const Login = () => {
   };
 
   const validateform = () => {
-    if (data.public_key == "" && data.private_key == "") {
+    if (data.public_key == "" && data.private_key == "" && data.policy_ref_id=="" && data.claim_amount=="") {
       return {
         public_key: "invalid public key",
         private_key: "invalid private key",
+        policy_ref_id:"invalid reference id",
+        claim_amount:"enter claim amount",
         error: true,
       };
     } else if (data.private_key == "") {
       return { private_key: "invalid private key", error: true };
-    } else if (data.public_key == "" && data.private_key == "") {
+    } else if (data.public_key == "") {
       return { public_key: "invalid public key", error: true };
+    }else if(data.policy_ref_id==""){
+      return { polcy_ref_id: "invalid policy id", error: true };
     }
     return { error: false };
   };
-  function sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validate = validateform();
@@ -56,39 +57,23 @@ const Login = () => {
       setError(validate);
       return;
     }
-    const baseUrl = "http://34.125.194.30:9090/baby_chain/public/login";
+    const baseUrl = "http://34.125.194.30:9080/baby_chain/private/claim_ins/";
     await axios
       .post(baseUrl, data)
-      .then(async (response) => {
+      .then((response) => {
         console.log("response", response);
         notifySuccess(response.data.message);
-        await sleep(3000).then(() => {
-          navigate("/");
-        });
       })
       .catch((error) => {
         console.log(error.response.data.error);
         notifyError(error.response.data.error);
+        return redirect("/");
       });
     console.log(data);
   };
-
   return (
     <>
       <Navbar />
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition={Slide}
-      />
       <div class="bg-white min-h-screen flex items-center justify-center font-poppins p-4">
         <div className=" w-full md:w-4/5 bg-blue-500 p-10 flex rounded-lg shadow-xl ">
           <div class="w-full h-full">
@@ -130,13 +115,47 @@ const Login = () => {
                 />
                 <div className="text-sm text-red-500">{error.private_key}</div>
               </div>
+              <div class="mb-8">
+                <label
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  for="password"
+                >
+                  Policy Ref Id
+                </label>
+                <input
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                  id="policy_ref_id"
+                  type="text"
+                  placeholder="policy ref id"
+                  value={data.policy_ref_id}
+                  onChange={handleChange}
+                />
+                <div className="text-sm text-red-500">{error.policy_ref_id}</div>
+              </div>
+              <div class="mb-8">
+                <label
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  for="password"
+                >
+                  Claim amount
+                </label>
+                <input
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                  id="claim_amount"
+                  type="text"
+                  placeholder="policy ref id"
+                  value={data.claim_amount}
+                  onChange={handleChange}
+                />
+                <div className="text-sm text-red-500">{error.claim_amount}</div>
+              </div>
 
               <div class="flex">
                 <button
                   class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   type="submit"
                 >
-                  Log In
+                Claim
                 </button>
               </div>
             </form>
@@ -146,5 +165,3 @@ const Login = () => {
     </>
   );
 };
-
-export default Login;
