@@ -214,7 +214,7 @@ const RegisterIns = () => {
             </button>
           </div>
         </form>
-        <div className="py-4 px-6 bg-white text-gray-850 rounded-lg"  value={policyId} onChange={""} onClick={""}>
+        <div className="py-4 px-6 bg-white text-gray-850 rounded-lg">
           {policyId}
         </div>
       </div>
